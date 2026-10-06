@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KASARE_Demo</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Header & Navigation -->
+  <header class="site-header">
+    <div class="container header-container">
+      <div class="brand-block">
+        <a href="#home" class="brand-title" id="brand-link">KASARE_Demo</a>
+        <span class="brand-tagline" data-i18n="tagline">Agricultural Advisory Prototype</span>
+      </div>
+
+      <nav class="main-nav" id="main-nav">
+        <button type="button" class="nav-link active" data-page="home" id="nav-home" data-i18n="nav_home">Home</button>
+        <button type="button" class="nav-link" data-page="advisories" id="nav-advisories" data-i18n="nav_advisories">Advisories</button>
+        <button type="button" class="nav-link" data-page="admin" id="nav-admin" data-i18n="nav_admin">Admin / R&D</button>
+      </nav>
+
+      <div class="header-right">
+        <!-- Language Switcher -->
+        <div class="lang-switcher" aria-label="Language selector">
+          <button type="button" class="lang-btn active" id="btn-lang-en" onclick="setLanguage('en')">English</button>
+          <span class="lang-divider">|</span>
+          <button type="button" class="lang-btn" id="btn-lang-mr" onclick="setLanguage('mr')">मराठी</button>
+        </div>
+        
+        <!-- Mobile Menu Toggle Button -->
+        <button type="button" class="mobile-toggle" id="mobile-toggle" aria-label="Toggle navigation menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Notification / Prototype Notice Banner -->
+  <div class="notice-bar">
+    <div class="container notice-content">
+      <span class="notice-icon">ℹ️</span>
+      <span data-i18n="sensor_notice">Advisories are generated using information from soil, water and weather sensors.</span>
+    </div>
+  </div>
+
+  <!-- Main Content Wrapper -->
+  <main class="main-content">
+    
+    <!-- PAGE 1: HOME -->
+    <section id="page-home" class="page-view active">
+      <div class="container">
+        
+        <!-- Top Grid: Current Advisories (Left/Main) & Weather (Right) -->
+        <div class="home-top-grid">
+          
+          <!-- Section A: Current Advisories -->
+          <section class="section-card home-advisories-section">
+            <div class="section-header">
+              <div>
+                <h2 class="section-heading" data-i18n="heading_current_advisories">Current Advisories</h2>
+                <p class="section-subheading" data-i18n="subheading_current_advisories">Live action points for crop clusters</p>
+              </div>
+              <button type="button" class="btn-link" id="home-view-all-advisories" onclick="navigateTo('advisories')">
+                <span data-i18n="btn_view_all_advisories">View All Advisories →</span>
+              </button>
+            </div>
+
+            <div class="advisory-cards-grid" id="home-advisory-cards">
+              <!-- Rendered via JS -->
+            </div>
+          </section>
+
+          <!-- Section B: Weather Information -->
+          <section class="section-card home-weather-section">
+            <div class="section-header">
+              <div>
+                <h2 class="section-heading" data-i18n="heading_weather">Weather</h2>
+                <p class="section-subheading" data-i18n="subheading_weather">Cluster local forecast</p>
+              </div>
+            </div>
+
+            <!-- Current Weather Highlight -->
+            <div class="current-weather-box">
+              <div class="current-weather-main">
+                <div class="weather-temp-badge">
+                  <span class="weather-main-icon">⛅</span>
+                  <span class="weather-degrees">28°C</span>
+                </div>
+                <div class="weather-status" data-i18n="weather_partly_cloudy">Partly Cloudy</div>
+              </div>
+
+              <div class="weather-metrics-list">
+                <div class="weather-metric">
+                  <span class="metric-label" data-i18n="weather_humidity">Humidity</span>
+                  <strong class="metric-value">72%</strong>
+                </div>
+                <div class="weather-metric">
+                  <span class="metric-label" data-i18n="weather_rainfall">Rainfall</span>
+                  <strong class="metric-value">2.4 mm</strong>
+                </div>
+                <div class="weather-metric">
+                  <span class="metric-label" data-i18n="weather_rain_prob">Rain Probability</span>
+                  <strong class="metric-value">30%</strong>
+                </div>
+                <div class="weather-metric">
+                  <span class="metric-label" data-i18n="weather_wind">Wind Speed</span>
+                  <strong class="metric-value">8 km/h</strong>
+                </div>
+              </div>
+            </div>
+
+            <!-- 5-Day Forecast -->
+            <div class="forecast-wrapper">
+              <h3 class="forecast-title" data-i18n="heading_forecast">5-Day Forecast</h3>
+              <div class="forecast-grid" id="forecast-grid">
+                <!-- Rendered via JS -->
+              </div>
+            </div>
+          </section>
+
+        </div>
+
+        <!-- Section C: Reference Farms -->
+        <section class="section-card reference-farms-section">
+          <div class="section-header">
+            <div>
+              <h2 class="section-heading" data-i18n="heading_reference_farms">Reference Farms</h2>
+              <p class="section-subheading" data-i18n="subheading_reference_farms">10 active reference farms monitoring regional crops</p>
+            </div>
+            <div class="farms-count-badge">
+              <span data-i18n="badge_farms_total">Total: 10 Farms</span>
+            </div>
+          </div>
+
+          <div class="farms-grid" id="farms-grid">
+            <!-- Rendered via JS (A1, A2, B1, B2, C1, C2, D1, D2, E1, E2) -->
+          </div>
+        </section>
+
+      </div>
+    </section>
+
+    <!-- PAGE 2: ADVISORIES -->
+    <section id="page-advisories" class="page-view">
+      <div class="container">
+        <div class="section-card">
+          <div class="section-header advisories-header">
+            <div>
+              <h1 class="section-heading" data-i18n="heading_all_advisories">Advisories</h1>
+              <p class="section-subheading" data-i18n="subheading_all_advisories">Comprehensive list of cluster recommendations</p>
+            </div>
+          </div>
+
+          <!-- Advisory Filter Pills -->
+          <div class="filters-container">
+            <span class="filter-label" data-i18n="filter_label">Filter by type:</span>
+            <div class="filter-pills" id="advisory-filter-pills">
+              <button type="button" class="filter-btn active" data-filter="all" onclick="filterAdvisories('all')" data-i18n="filter_all">All</button>
+              <button type="button" class="filter-btn" data-filter="irrigation" onclick="filterAdvisories('irrigation')" data-i18n="filter_irrigation">💧 Irrigation</button>
+              <button type="button" class="filter-btn" data-filter="weather" onclick="filterAdvisories('weather')" data-i18n="filter_weather">🌧️ Weather</button>
+              <button type="button" class="filter-btn" data-filter="pest" onclick="filterAdvisories('pest')" data-i18n="filter_pest">🐛 Pest</button>
+              <button type="button" class="filter-btn" data-filter="nutrient" onclick="filterAdvisories('nutrient')" data-i18n="filter_nutrient">🌱 Nutrient</button>
+              <button type="button" class="filter-btn" data-filter="water" onclick="filterAdvisories('water')" data-i18n="filter_water">🌊 Water</button>
+            </div>
+          </div>
+
+          <!-- Advisories List Container -->
+          <div class="advisories-list" id="advisories-full-list">
+            <!-- Rendered via JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAGE 3: ADMIN / R&D -->
+    <section id="page-admin" class="page-view">
+      <div class="container">
+        <div class="admin-wrapper">
+          <div class="section-card admin-card">
+            
+            <div class="admin-header">
+              <div class="admin-icon-badge">🔐</div>
+              <h1 class="section-heading" data-i18n="heading_admin">Admin / R&D</h1>
+              <p class="admin-desc" data-i18n="desc_admin">Restricted access for research and development</p>
+            </div>
+
+            <!-- Auth Simulated Status Alert -->
+            <div id="admin-auth-success" class="auth-success-alert" style="display: none;">
+              <div class="alert-icon">✅</div>
+              <div class="alert-body">
+                <h3 data-i18n="auth_welcome_title">Welcome to KASARE_Demo R&D Portal</h3>
+                <p data-i18n="auth_welcome_desc">Prototype authentication confirmed. The R&D research dashboard is currently under development.</p>
+                <button type="button" class="btn-secondary btn-sm" onclick="handleAdminLogout()" data-i18n="btn_logout">Sign Out</button>
+              </div>
+            </div>
+
+            <!-- Login / Signup Form Container -->
+            <div id="admin-forms-box">
+              
+              <!-- Tab switcher -->
+              <div class="auth-tabs">
+                <button type="button" class="auth-tab-btn active" id="tab-login" onclick="toggleAuthMode('login')" data-i18n="tab_login">Login</button>
+                <button type="button" class="auth-tab-btn" id="tab-signup" onclick="toggleAuthMode('signup')" data-i18n="tab_signup">New Admin? Create Account</button>
+              </div>
+
+              <!-- LOGIN FORM -->
+              <form id="form-admin-login" class="auth-form" onsubmit="handleLoginSubmit(event)">
+                <div class="form-group">
+                  <label for="login-email" data-i18n="label_email_username">Email / Username</label>
+                  <input type="text" id="login-email" class="form-input" required placeholder="admin@kasare.org">
+                </div>
+
+                <div class="form-group">
+                  <label for="login-password" data-i18n="label_password">Password</label>
+                  <input type="password" id="login-password" class="form-input" required placeholder="••••••••">
+                </div>
+
+                <button type="submit" class="btn-primary btn-block" data-i18n="btn_login">Login</button>
+                
+                <div class="auth-switch-note">
+                  <span data-i18n="note_new_admin">New Admin?</span>
+                  <a href="javascript:void(0)" onclick="toggleAuthMode('signup')" data-i18n="link_create_account">Create Account</a>
+                </div>
+              </form>
+
+              <!-- SIGNUP FORM -->
+              <form id="form-admin-signup" class="auth-form" style="display: none;" onsubmit="handleSignupSubmit(event)">
+                <div class="form-group">
+                  <label for="signup-name" data-i18n="label_name">Name</label>
+                  <input type="text" id="signup-name" class="form-input" required placeholder="Dr. S. Patil">
+                </div>
+
+                <div class="form-group">
+                  <label for="signup-email" data-i18n="label_email">Email</label>
+                  <input type="email" id="signup-email" class="form-input" required placeholder="researcher@kasare.org">
+                </div>
+
+                <div class="form-group">
+                  <label for="signup-password" data-i18n="label_password">Password</label>
+                  <input type="password" id="signup-password" class="form-input" required placeholder="••••••••">
+                </div>
+
+                <div class="form-group">
+                  <label for="signup-confirm-password" data-i18n="label_confirm_password">Confirm Password</label>
+                  <input type="password" id="signup-confirm-password" class="form-input" required placeholder="••••••••">
+                </div>
+
+                <button type="submit" class="btn-primary btn-block" data-i18n="btn_create_account">Create Account</button>
+
+                <div class="auth-switch-note">
+                  <span data-i18n="note_have_account">Already registered?</span>
+                  <a href="javascript:void(0)" onclick="toggleAuthMode('login')" data-i18n="link_login_here">Login here</a>
+                </div>
+              </form>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Modal for Reference Farm Details -->
+  <div class="modal-backdrop" id="farm-detail-modal" onclick="closeFarmModal(event)">
+    <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-farm-title">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <span class="modal-code-pill" id="modal-farm-code">A1</span>
+          <h2 class="modal-title" id="modal-farm-title">Reference Farm Details</h2>
+        </div>
+        <button type="button" class="modal-close-btn" onclick="closeFarmModalDirect()" aria-label="Close modal">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="detail-grid">
+          <div class="detail-item">
+            <span class="detail-label" data-i18n="label_farm_code">Farm Code</span>
+            <strong class="detail-value" id="modal-code-val">A1</strong>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label" data-i18n="label_crop">Crop</span>
+            <strong class="detail-value" id="modal-crop-val">Paddy</strong>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label" data-i18n="label_sowing_date">Sowing Date</span>
+            <strong class="detail-value" id="modal-sowing-val">18 June 2026</strong>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label" data-i18n="label_crop_stage">Crop Stage</span>
+            <strong class="detail-value" id="modal-stage-val">Vegetative</strong>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label" data-i18n="label_followers">Followers</span>
+            <strong class="detail-value" id="modal-followers-val">27</strong>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label" data-i18n="label_status">Status</span>
+            <strong class="detail-value status-active" id="modal-status-val">Active</strong>
+          </div>
+        </div>
+
+        <div class="detail-advisory-box">
+          <div class="detail-advisory-title" data-i18n="label_latest_advisory">Latest Advisory:</div>
+          <p class="detail-advisory-text" id="modal-advisory-val">Irrigation recommended due to low soil moisture.</p>
+        </div>
+
+        <div class="detail-disclaimer">
+          <small data-i18n="modal_disclaimer">Advisories are generated using information from soil, water and weather sensors.</small>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn-secondary" onclick="closeFarmModalDirect()" data-i18n="btn_close">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div class="footer-left">
+        <strong>KASARE_Demo</strong> — <span data-i18n="footer_platform_desc">Agricultural Advisory Platform</span>
+      </div>
+      <div class="footer-right">
+        <span data-i18n="sensor_notice">Advisories are generated using information from soil, water and weather sensors.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
